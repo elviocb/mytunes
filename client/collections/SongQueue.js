@@ -3,12 +3,17 @@ var SongQueue = Songs.extend({
 
   initialize: function(){
   	this.on('add', this.enqueue , this); 
+  	this.on('remove', this.dequeue , this); 
   },
 
   enqueue: function(){
+		if (this.length === 1) {
+			this.playFirst();
+		}
+  },
 
-	console.log(this);
-	this.models[0].play();
+  playFirst: function(){
+  	this.at(0).play();
   }
 
 });
