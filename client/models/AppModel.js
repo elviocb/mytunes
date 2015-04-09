@@ -22,12 +22,17 @@ var AppModel = Backbone.Model.extend({
     }, this);
 
     params.library.on('dequeue', function(song){
-         console.log('ended invoked!!');
+         // console.log('ended invoked!! length is now:', this.get('songQueue').length);
          this.get('songQueue').remove(song);
-         this.set('currentSong', this.get('songQueue').at(0));
-         
+         // console.log('song removed!! length is now:', this.get('songQueue').length);
+         this.set('currentSong', this.get('songQueue').at(0));      
     }, this);
-
+    
+    params.library.on('ended', function(song){
+         // console.log('ended invoked!!');
+         this.get('songQueue').remove(song);
+         this.set('currentSong', this.get('songQueue').at(0));      
+    }, this);
 
   }
 
